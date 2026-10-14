@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hero Battle Arena</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header><div class="brand"><span class="brand-mark">✦</span><div><h1>HERO BATTLE <em>ARENA</em></h1><p>Тактическая супергеройская арена</p></div></div><button id="new-game" class="ghost">↻ Новая игра</button></header>
+    <section id="setup" class="screen active">
+      <div class="hero-panel"><span class="eyebrow">MVP · v1.0</span><h2>Собери команду.<br><i>Переиграй</i> соперника.</h2><p>Выбери правила и испытай составы героев в пошаговой битве.</p></div>
+      <form id="settings-form" class="settings-card">
+        <h3>⚙ Настройки игры</h3>
+        <label>Режим <select id="mode"><option value="cpu">Игрок vs Компьютер</option><option value="pvp">Игрок vs Игрок</option></select></label>
+        <label>Стартовые монеты <input id="budget" type="number" min="400" max="3000" value="1000" step="50"></label>
+        <div class="two-cols"><label>Мин. героев <input id="min-heroes" type="number" min="1" max="5" value="3"></label><label>Макс. героев <input id="max-heroes" type="number" min="1" max="6" value="5"></label></div>
+        <label>Сложность ИИ <select id="difficulty"><option value="easy">Easy — случайный</option><option value="normal" selected>Normal — сбалансированный</option><option value="hard">Hard — контрпики</option></select></label>
+        <label>Правило первого хода <select id="first-turn"><option value="random">Случайный бросок</option><option value="speed">Самая высокая скорость</option></select></label>
+        <div class="toggle-line"><label><input id="duplicates" type="checkbox"> Одинаковые герои</label><label><input id="criticals" type="checkbox" checked> Критические удары</label></div>
+        <button class="primary" type="submit">Собрать команду <span>→</span></button>
+      </form>
+    </section>
+    <section id="builder" class="screen">
+      <div class="builder-top"><div><span class="eyebrow" id="builder-label">КОМАНДА</span><h2 id="builder-title">Соберите свою команду</h2></div><div class="budget-box"><span>БЮДЖЕТ</span><strong id="coins">1000</strong><small>монет осталось</small></div></div>
+      <div class="builder-layout"><div><div class="filters"><input id="hero-search" placeholder="⌕ Найти героя"><select id="role-filter"><option value="all">Все роли</option><option value="Tank">Танки</option><option value="Striker">Ударники</option><option value="Tactician">Тактики</option><option value="Support">Поддержка</option></select></div><div id="hero-list" class="hero-list"></div></div><aside class="team-cart"><h3>Ваша команда <span id="team-count">0 / 5</span></h3><div id="team-list"></div><p class="hint" id="team-hint">Выберите минимум 3 героев.</p><button id="finish-team" class="primary" disabled>Подтвердить команду →</button></aside></div>
+    </section>
+    <section id="battle" class="screen"><div class="battle-head"><div><span class="eyebrow">РАУНД <b id="round">1</b></span><h2 id="turn-title">Определяем первый ход…</h2></div><button id="rules" class="ghost">Правила</button></div><div class="arena"><div class="team-side"><h3 id="left-name">ВАША КОМАНДА</h3><div id="left-team" class="battle-team"></div></div><div class="versus">VS<div id="turn-badge">⚔</div></div><div class="team-side enemy"><h3 id="right-name">КОМАНДА ИИ</h3><div id="right-team" class="battle-team"></div></div></div><div id="action-panel" class="action-panel"><div class="action-intro"><span>ВЫБРАННЫЙ ГЕРОЙ</span><strong id="active-hero">—</strong><small id="active-stats">Выберите живого героя</small></div><div id="actions" class="actions"></div></div><div class="log-wrap"><h3>Ход сражения</h3><div id="battle-log" class="battle-log"></div></div></section>
+    <section id="results" class="screen"><div class="result-banner"><span class="eyebrow">БИТВА ЗАВЕРШЕНА</span><h2 id="winner">ПОБЕДА!</h2><p id="winner-note"></p></div><div class="results-grid"><article><h3>Статистика боя</h3><div id="summary"></div></article><article><h3>🏆 MVP</h3><div id="mvp"></div></article><article><h3>Почему победили?</h3><div id="analysis"></div></article></div><button id="play-again" class="primary wide">Начать новую игру →</button></section>
+  </main>
+  <dialog id="rules-dialog"><button class="close" onclick="this.closest('dialog').close()">×</button><h2>Правила арены</h2><p>В свой ход выберите героя, затем действие и цель. Обычная атака наносит урон с учётом защиты. Защита усиливает броню до следующего хода героя. Способности могут оглушать, лечить или повышать урон. Побеждает команда, у которой остались живые герои.</p></dialog>
+  <script src="heroes-data.js"></script><script src="engine.js"></script><script src="app.js"></script>
+</body>
+</html>
+
