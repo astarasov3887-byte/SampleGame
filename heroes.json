@@ -1,0 +1,4 @@
+[
+  {"note":"Human-editable hero database. heroes-data.js is loaded by index.html so the game also works when opened directly from disk."}
+]
+
